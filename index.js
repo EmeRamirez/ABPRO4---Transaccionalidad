@@ -2,24 +2,10 @@ import express from 'express';
 import Cursor from 'pg-cursor';
 import { pool } from './db.js';
 
-import { nvaTransaccion } from './functions.js';
+import { nvaTransaccion, buscarSaldo, mostrarRegistros } from './functions.js';
 
-
-// const accion = process.argv[2];
-
-// switch (accion){
-//     case 'transaccion':
-//     nvaTransaccion();
-//     break;
-// }
-
-
-// pool.query('SELECT * FROM table_name',(err,res)=>{
-//     if (err) throw err;
-//     console.table(res.rows);
-//     pool.end()
-// });
-
+const accion = process.argv[2];
+const argumentos = process.argv.slice(3);
 
 let preguntas =["Ingresa el número de tu cuenta \n", "Indica tipo de transacción\n 1: Giro \n 2:Transferencia \n 3: Pago \n","Ingresa el monto \n"];
 export let respuestas =[];
@@ -33,11 +19,22 @@ process.stdin.on('data', async(data)=>{
     if(respuestas.length < preguntas.length){
         preguntar(respuestas.length);
     }else{
-        // process.stdout.write(respuestas.toString())
         await nvaTransaccion(respuestas)     
     }
   
 })
 
-
-preguntar(0);
+switch (accion){
+    case 'transaccion':
+        preguntar(0);
+        break;
+    case 'saldo':
+        buscarSaldo(argumentos[0]);
+        break;
+    case 'registros':
+        mostrarRegistros(argumentos[0]);
+        break;
+    default:
+        process.exit();
+        break;
+}

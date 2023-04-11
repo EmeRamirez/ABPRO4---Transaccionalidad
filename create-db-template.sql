@@ -18,3 +18,5 @@ CREATE TABLE cuentas (
 ALTER TABLE transacciones ADD CONSTRAINT fk_cuentas_transacciones FOREIGN KEY (cuenta_id) REFERENCES cuentas(id_cuenta);
 
 INSERT INTO cuentas (saldo) VALUES (20000);
+INSERT INTO cuentas (saldo) VALUES (10000);
+
