@@ -12,10 +12,3 @@ export const pool = new Pool({
     port: process.env.PORT_DB,
     database: process.env.DATABASE_NAME
 });
-
-
-// pool.query('SELECT * FROM usuarios',(err,res)=>{
-//     if (err) throw err;
-//     console.table(res.rows);
-//     pool.end()
-// })
